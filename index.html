@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelier Strand – Frisör i Göteborg</title>
+  <meta name="description" content="Atelier Strand – Premium frisörsalong i Göteborg. Boka din tid för klippning, färgning och styling." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafaf8;
+      --beige: #e8e0d5;
+      --beige-light: #f3ede6;
+      --gray: #8a8a8a;
+      --gray-light: #d4cfc9;
+      --accent: #c4a882;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* === SCROLLBAR === */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--beige-light); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* === NAVIGATION === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4rem;
+      transition: all 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 250, 248, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 1rem 4rem;
+      border-bottom: 1px solid var(--beige);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav.scrolled .nav-logo { color: var(--black); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav.scrolled .nav-links a { color: var(--gray); }
+    .nav-links a:hover { color: var(--accent) !important; }
+
+    .nav-cta {
+      font-size: 0.7rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.2em !important;
+      text-transform: uppercase !important;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.5);
+      color: white !important;
+      text-decoration: none;
+      transition: all 0.3s !important;
+    }
+
+    nav.scrolled .nav-cta {
+      border-color: var(--black) !important;
+      color: var(--black) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+      color: white !important;
+    }
+
+    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: white; transition: all 0.3s; }
+    nav.scrolled .hamburger span { background: var(--black); }
+
+    /* === HERO === */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 8rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1410 0%, #2d2419 50%, #1a1208 100%);
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(196,168,130,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(196,168,130,0.08) 0%, transparent 50%);
+    }
+
+    /* Decorative lines */
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      opacity: 0.15;
+    }
+
+    .hero-lines::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: 15%;
+      width: 1px;
+      height: 200%;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      animation: lineFloat 8s ease-in-out infinite;
+    }
+
+    .hero-lines::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: 40%;
+      width: 1px;
+      height: 200%;
+      background: linear-gradient(to bottom, transparent, rgba(196,168,130,0.5), transparent);
+      animation: lineFloat 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes lineFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(30px); }
+    }
+
+    /* Large decorative text */
+    .hero-dekor {
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: var(--font-display);
+      font-size: 10rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.03);
+      letter-spacing: 0.3em;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 4rem;
+      max-width: 800px;
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      max-width: 440px;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: var(--accent);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.35s ease;
+    }
+
+    .btn-primary:hover {
+      background: #b8966e;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.8);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.35s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Stats bar */
+    .hero-stats {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      z-index: 2;
+      display: flex;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+
+    .stat {
+      flex: 1;
+      padding: 1.5rem 4rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === SECTION BASE === */
+    section { padding: 7rem 4rem; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === OM OSS === */
+    #om {
+      background: var(--black);
+      color: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+
+    .om-visual {
+      position: relative;
+      min-height: 600px;
+      background: linear-gradient(135deg, #1e1812, #2d2419);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .om-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(196,168,130,0.2) 0%, transparent 70%);
+    }
+
+    .om-scissors {
+      position: relative;
+      z-index: 1;
+      font-size: 8rem;
+      opacity: 0.15;
+      filter: grayscale(1);
+    }
+
+    .om-badge {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      width: 120px;
+      height: 120px;
+      border: 1px solid rgba(196,168,130,0.3);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .om-badge-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .om-badge-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .om-content {
+      padding: 7rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .om-content .section-label { color: var(--accent); }
+    .om-content .section-title { color: var(--white); }
+
+    .om-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 3rem;
+      max-width: 420px;
+    }
+
+    .om-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .om-features li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+    }
+
+    .om-features li::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* === BEHANDLINGAR === */
+    #behandlingar {
+      background: var(--beige-light);
+    }
+
+    .behandlingar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .behandlingar-intro {
+      color: var(--gray);
+      max-width: 380px;
+      font-size: 0.9rem;
+    }
+
+    .prislista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    .pris-kategori {
+      background: var(--white);
+      padding: 2.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .pris-kategori:hover { transform: translateY(-4px); }
+
+    .pris-ikon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .pris-namn {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--beige);
+    }
+
+    .pris-rad {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--beige-light);
+    }
+
+    .pris-rad:last-child { border-bottom: none; }
+
+    .pris-service {
+      font-size: 0.85rem;
+      color: #444;
+    }
+
+    .pris-tid {
+      font-size: 0.7rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    .pris-kr {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--black);
+      white-space: nowrap;
+    }
+
+    /* === BOKNING === */
+    #bokning {
+      background: var(--black);
+      text-align: center;
+      padding: 8rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bokning::before {
+      content: 'BOKA';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 22vw;
+      font-weight: 300;
+      color: rgba(255,255,255,0.02);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    #bokning .section-label { color: var(--accent); }
+    #bokning .section-title { color: var(--white); }
+
+    .bokning-text {
+      color: rgba(255,255,255,0.5);
+      max-width: 480px;
+      margin: 0 auto 3.5rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .bokning-btns {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-light {
+      display: inline-block;
+      padding: 1rem 3rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.35s ease;
+    }
+
+    .btn-light:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* === OMDÖMEN === */
+    #omdomen {
+      background: var(--white);
+    }
+
+    .omdomen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .omdome {
+      background: var(--beige-light);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .omdome::before {
+      content: '"';
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: var(--accent);
+      opacity: 0.3;
+      position: absolute;
+      top: -0.5rem;
+      left: 1.5rem;
+      line-height: 1;
+    }
+
+    .omdome-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+      padding-top: 1rem;
+    }
+
+    .omdome-stars {
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+    }
+
+    .omdome-namn {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* === ÖPPETTIDER + KONTAKT === */
+    #kontakt {
+      background: var(--beige);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+
+    .kontakt-info {
+      padding: 7rem 5rem;
+    }
+
+    .oppettider-lista {
+      margin-top: 2.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .oppettider-rad {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.85rem;
+    }
+
+    .oppettider-dag { font-weight: 500; }
+    .oppettider-tid { color: var(--gray); }
+
+    .kontakt-detaljer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    .kontakt-rad {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: #444;
+    }
+
+    .kontakt-ikon { font-size: 1rem; }
+
+    .kontakt-karta {
+      background: #d0ccc5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .karta-placeholder {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .karta-placeholder .ikon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+    .karta-placeholder p { font-size: 0.8rem; color: rgba(0,0,0,0.4); letter-spacing: 0.1em; }
+
+    /* Google Maps embed placeholder */
+    .maps-embed {
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23c8c0b5"/><line x1="0" y1="50" x2="100" y2="50" stroke="%23b8b0a5" stroke-width="1"/><line x1="50" y1="0" x2="50" y2="100" stroke="%23b8b0a5" stroke-width="1"/></svg>') repeat;
+      opacity: 0.5;
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: var(--black);
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-text { font-size: 0.75rem; }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* === PHONE CTA FLOATING === */
+    .phone-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 50;
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 30px rgba(196,168,130,0.4);
+      transition: all 0.3s;
+    }
+
+    .phone-fab:hover {
+      background: #b8966e;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(196,168,130,0.5);
+    }
+
+    /* === MOBILE === */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      nav.scrolled { padding: 0.9rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      section { padding: 5rem 1.5rem; }
+
+      .hero-content { padding: 0 1.5rem; }
+      .hero-title { font-size: 3rem; }
+      .hero-stats { display: none; }
+
+      #om {
+        grid-template-columns: 1fr;
+      }
+
+      .om-visual { min-height: 300px; }
+      .om-content { padding: 4rem 1.5rem; }
+
+      .behandlingar-header { flex-direction: column; }
+
+      #kontakt {
+        grid-template-columns: 1fr;
+      }
+
+      .kontakt-info { padding: 5rem 1.5rem; }
+      .kontakt-karta { min-height: 300px; }
+
+      footer {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .phone-fab { bottom: 1rem; right: 1rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-btns { flex-direction: column; width: fit-content; }
+      .btn-primary, .btn-ghost { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Atelier Strand</a>
+    <ul class="nav-links">
+      <li><a href="#om">Om oss</a></li>
+      <li><a href="#behandlingar">Behandlingar</a></li>
+      <li><a href="#omdomen">Omdömen</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="tel:031000000" class="nav-cta">Boka tid</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-dekor">STRAND</div>
+
+    <div class="hero-content">
+      <span class="hero-tagline">Premium Frisörsalong · Göteborg</span>
+      <h1 class="hero-title">
+        Atelier Strand –<br>
+        Frisör i <em>Göteborg</em>
+      </h1>
+      <p class="hero-subtitle">
+        Professionell hårvård, färg och styling som framhäver din stil. Vi skapar resultat som håller.
+      </p>
+      <div class="hero-btns">
+        <a href="tel:031000000" class="btn-primary">Boka tid nu</a>
+        <a href="#behandlingar" class="btn-ghost">Se behandlingar</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Års erfarenhet</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2 400+</span>
+        <span class="stat-label">Nöjda kunder</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5★</span>
+        <span class="stat-label">Google-betyg</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- OM OSS -->
+  <section id="om">
+    <div class="om-visual">
+      <div class="om-scissors">✂</div>
+      <div class="om-badge">
+        <span class="om-badge-num">12</span>
+        <span class="om-badge-text">Års erfarenhet</span>
+      </div>
+    </div>
+    <div class="om-content reveal">
+      <span class="section-label">Om oss</span>
+      <h2 class="section-title">Vi är mer än<br>en <em>frisörsalong</em></h2>
+      <p class="om-text">
+        Vi är en modern frisörsalong i Göteborg med fokus på kvalitet, service och resultat som håller. 
+        Varje kund är unik och förtjänar en behandling anpassad just för dem.
+      </p>
+      <ul class="om-features">
+        <li>Certifierade och erfarna frisörer</li>
+        <li>Färg- och stylingexperter</li>
+        <li>Hög kundnöjdhet — alltid</li>
+        <li>Premium produkter från Wella & Kerastase</li>
+        <li>Personligt anpassad service</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BEHANDLINGAR -->
+  <section id="behandlingar">
+    <div class="behandlingar-header reveal">
+      <div>
+        <span class="section-label">Prislista</span>
+        <h2 class="section-title">Våra<br><em>behandlingar</em></h2>
+      </div>
+      <p class="behandlingar-intro">
+        Transparenta priser utan dolda kostnader. Alltid professionellt utförda.
+      </p>
+    </div>
+
+    <div class="prislista">
+
+      <div class="pris-kategori reveal">
+        <span class="pris-ikon">✂</span>
+        <div class="pris-namn">Klippning</div>
+        <div class="pris-rad">
+          <span class="pris-service">Klippning dam</span>
+          <span class="pris-tid">60 min</span>
+          <span class="pris-kr">650 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Klippning herr</span>
+          <span class="pris-tid">45 min</span>
+          <span class="pris-kr">450 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Klippning barn</span>
+          <span class="pris-tid">30 min</span>
+          <span class="pris-kr">350 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Lugg</span>
+          <span class="pris-tid">15 min</span>
+          <span class="pris-kr">150 kr</span>
+        </div>
+      </div>
+
+      <div class="pris-kategori reveal">
+        <span class="pris-ikon">🎨</span>
+        <div class="pris-namn">Färgning</div>
+        <div class="pris-rad">
+          <span class="pris-service">Helton</span>
+          <span class="pris-tid">90 min</span>
+          <span class="pris-kr">fr 950 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Ansatser</span>
+          <span class="pris-tid">60 min</span>
+          <span class="pris-kr">fr 550 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Slingor (halvhuvud)</span>
+          <span class="pris-tid">120 min</span>
+          <span class="pris-kr">fr 1 200 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Slingor (helhuvud)</span>
+          <span class="pris-tid">150 min</span>
+          <span class="pris-kr">fr 1 700 kr</span>
+        </div>
+      </div>
+
+      <div class="pris-kategori reveal">
+        <span class="pris-ikon">✨</span>
+        <div class="pris-namn">Styling & Behandlingar</div>
+        <div class="pris-rad">
+          <span class="pris-service">Blowout & styling</span>
+          <span class="pris-tid">45 min</span>
+          <span class="pris-kr">550 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Lockar / Golvång</span>
+          <span class="pris-tid">60 min</span>
+          <span class="pris-kr">650 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Keratinbehandling</span>
+          <span class="pris-tid">180 min</span>
+          <span class="pris-kr">2 500 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Hårmask</span>
+          <span class="pris-tid">30 min</span>
+          <span class="pris-kr">350 kr</span>
+        </div>
+      </div>
+
+      <div class="pris-kategori reveal">
+        <span class="pris-ikon">💈</span>
+        <div class="pris-namn">Skägg & Herr</div>
+        <div class="pris-rad">
+          <span class="pris-service">Skäggtrim</span>
+          <span class="pris-tid">30 min</span>
+          <span class="pris-kr">300 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Rakning med rakkniv</span>
+          <span class="pris-tid">45 min</span>
+          <span class="pris-kr">450 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Klipp + skägg-paket</span>
+          <span class="pris-tid">75 min</span>
+          <span class="pris-kr">700 kr</span>
+        </div>
+        <div class="pris-rad">
+          <span class="pris-service">Herrfärg</span>
+          <span class="pris-tid">60 min</span>
+          <span class="pris-kr">fr 650 kr</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOKNING CTA -->
+  <section id="bokning">
+    <span class="section-label reveal">Redo?</span>
+    <h2 class="section-title reveal">Boka din tid<br><em>idag</em></h2>
+    <p class="bokning-text reveal">
+      Boka din tid idag och få professionell behandling av erfarna frisörer. 
+      Vi ser fram emot att välkomna dig till Atelier Strand.
+    </p>
+    <div class="bokning-btns reveal">
+      <a href="tel:031000000" class="btn-primary">📞 Ring oss nu</a>
+      <a href="mailto:info@atelirstrand.se" class="btn-light">Maila oss</a>
+    </div>
+  </section>
+
+  <!-- OMDÖMEN -->
+  <section id="omdomen">
+    <div class="reveal">
+      <span class="section-label">Omdömen</span>
+      <h2 class="section-title">Vad våra kunder<br>säger om <em>oss</em></h2>
+    </div>
+    <div class="omdomen-grid">
+      <div class="omdome reveal">
+        <div class="omdome-stars">★★★★★</div>
+        <p class="omdome-text">Bästa frisören i stan! Har aldrig haft så bra resultat. Kommer alltid tillbaka till Atelier Strand.</p>
+        <span class="omdome-namn">— Sofia L.</span>
+      </div>
+      <div class="omdome reveal">
+        <div class="omdome-stars">★★★★★</div>
+        <p class="omdome-text">Alltid perfekt resultat. Personalen är så kunnig och tar sig verkligen tid att förstå vad man vill ha.</p>
+        <span class="omdome-namn">— Marcus E.</span>
+      </div>
+      <div class="omdome reveal">
+        <div class="omdome-stars">★★★★★</div>
+        <p class="omdome-text">Proffsigt och supertrevligt bemötande. Slingor och klippning blev exakt som jag velat. 10/10!</p>
+        <span class="omdome-namn">— Linnea K.</span>
+      </div>
+      <div class="omdome reveal">
+        <div class="omdome-stars">★★★★★</div>
+        <p class="omdome-text">Har sökt efter min drömfrisör länge. Hittade dem äntligen. Fantastisk service och otroligt kunniga.</p>
+        <span class="omdome-namn">— David M.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÖPPETTIDER + KONTAKT -->
+  <section id="kontakt">
+    <div class="kontakt-info reveal">
+      <span class="section-label">Kontakt</span>
+      <h2 class="section-title">Hitta<br>till <em>oss</em></h2>
+
+      <div class="oppettider-lista">
+        <div class="oppettider-rad">
+          <span class="oppettider-dag">Måndag – Fredag</span>
+          <span class="oppettider-tid">09:00 – 19:00</span>
+        </div>
+        <div class="oppettider-rad">
+          <span class="oppettider-dag">Lördag</span>
+          <span class="oppettider-tid">09:00 – 16:00</span>
+        </div>
+        <div class="oppettider-rad">
+          <span class="oppettider-dag">Söndag</span>
+          <span class="oppettider-tid">11:00 – 16:00</span>
+        </div>
+      </div>
+
+      <div class="kontakt-detaljer">
+        <div class="kontakt-rad">
+          <span class="kontakt-ikon">📍</span>
+          <span>Avenyn 42, 411 36 Göteborg</span>
+        </div>
+        <div class="kontakt-rad">
+          <span class="kontakt-ikon">📞</span>
+          <a href="tel:031000000" style="color:inherit; text-decoration:none;">031-000 000</a>
+        </div>
+        <div class="kontakt-rad">
+          <span class="kontakt-ikon">✉</span>
+          <a href="mailto:info@atelierstrand.se" style="color:inherit; text-decoration:none;">info@atelierstrand.se</a>
+        </div>
+        <div class="kontakt-rad">
+          <span class="kontakt-ikon">📸</span>
+          <span>@atelierstrand</span>
+        </div>
+      </div>
+
+      <a href="tel:031000000" class="btn-primary" style="margin-top: 3rem; display: inline-block;">
+        Ring & boka nu
+      </a>
+    </div>
+
+    <div class="kontakt-karta">
+      <div class="maps-embed"></div>
+      <div class="karta-placeholder">
+        <div class="ikon">🗺</div>
+        <p>GOOGLE MAPS<br>BYTA UT MOT RIKTIG EMBED</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Atelier Strand</div>
+    <p class="footer-text">© 2025 Atelier Strand. Frisörsalong i Göteborg.</p>
+    <ul class="footer-links">
+      <li><a href="#om">Om oss</a></li>
+      <li><a href="#behandlingar">Priser</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <a href="tel:031000000" class="phone-fab" id="phoneFab" style="display:none;">
+    📞 Ring & boka
+  </a>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Floating phone CTA (show after scroll)
+    const phoneFab = document.getElementById('phoneFab');
+    window.addEventListener('scroll', () => {
+      phoneFab.style.display = window.scrollY > 500 ? 'flex' : 'none';
+    });
+
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.style.display === 'flex';
+      navLinks.style.cssText = isOpen
+        ? ''
+        : 'display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(10,10,10,0.97);padding:2rem;gap:1.5rem;';
+    });
+
+    // Smooth stagger on behandlingar cards
+    document.querySelectorAll('.pris-kategori').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.08}s`;
+    });
+  </script>
+</body>
+</html>
